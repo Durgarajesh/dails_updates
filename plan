@@ -89,4 +89,5 @@ git stash save -- it will saves local changes to stash list
 
 git stash apply -- it will stashed local changes
 
-
+git checkout master
+git merge --no-ff heroku_commands  -- will merges heroku_command branch to master branch
