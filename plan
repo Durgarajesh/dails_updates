@@ -70,11 +70,23 @@ git checkout branch_name  -- it switch branch_name branch
 
 git checkout -b branch_name1  -- create creates a new branch called branch_name1 and selects that branch 
 
+
 git push origin branch_name -- it will pushes code to branch_name branch
 
 
 git diff file_name -- lists changes made to file_name file
 
 git checkout branch_name -- used to switch to branch_name branch
+
+
+git stash -- it stashes  local changes
+
+git stash list -- it lists all the stashes
+
+git stash clear -- it will removes all the stashes
+
+git stash save -- it will saves local changes to stash list
+
+git stash apply -- it will stashed local changes
 
 
