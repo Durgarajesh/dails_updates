@@ -69,3 +69,6 @@ git branch  -- will gives list of active branches
 git checkout branch_name  -- it switch branch_name branch
 
 git checkout -b branch_name1  -- create creates a new branch called branch_name1 and selects that branch 
+
+
+karthik
