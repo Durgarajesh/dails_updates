@@ -6,6 +6,10 @@ To install  Sublime-Text-3:
  1.sudo add-apt-repository ppa:webupd8team/sublime-text-3
  2.sudo apt-get update
  3.sudo apt-get install sublime-text-installer
+Usage of sublime
+  1.rails new sample
+  2.cd sample # navigate to your proect irectory
+  3.subl .
 
 To install mysql in ubuntu
  sudo apt-get install mysql-server
