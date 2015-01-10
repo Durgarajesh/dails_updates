@@ -1,0 +1,52 @@
+
+
+1. rvm instllation
+
+2. ruby version on it
+
+   rvm -v -- give version of rvm insalled
+   rvm list  -- list all the ruby versions installed on ubunu machine
+   rvm install 1.9.3  -- installs ruby version 1.9.3
+   rvm install 1.8.7  --
+   rvm install 2.0.0  --
+   
+   rvm list
+   rvm use 1.9.3  -- used select ruby version 1.9.3
+   ruby -v   -- it will gives 1.9.3
+   rvm use 2.0.0
+   ruby -v --it will give 2.0.0
+   rvm use 1.8.7
+   ruby -v  -- will give 1.8.7
+   
+  1.   install 1.9.3  --> 2.3.5,3.2.3,4.0.0
+  2. we can install multiple versions of rails in single ruby
+   
+   rvm use 1.9.3   -- used select ruby 1.9.3
+   rvm gemset create rails2  -- create a gemset for rails2
+   rvm gemset use rails2 -- select the gemset for rails2
+   gem  install rails -v '2.3.5'
+
+   rvm gemset create rails3  -- create a gemset for rails3
+   rvm gemset use rails3 -- select the gemset for rails3
+   gem  install rails -v '3.2.3'
+
+   rvm gemset create rails4  -- create a gemset for rails2
+   rvm gemset use rails4 -- select the gemset for rails2
+   gem  install rails -v '4.0.0'
+
+  1. use 2.0.0 and install 3.2.3 , 4.0.0,4.1.0
+
+
+   
+
+   
+
+3.installation of rails versions
+
+4.installation of mysql and postgres
+
+5. installations of ides like rubymine,netbeans,sublime
+
+
+
+
