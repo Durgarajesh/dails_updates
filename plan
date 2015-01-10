@@ -70,5 +70,11 @@ git checkout branch_name  -- it switch branch_name branch
 
 git checkout -b branch_name1  -- create creates a new branch called branch_name1 and selects that branch 
 
+git push origin branch_name -- it will pushes code to branch_name branch
 
-karthik
+
+git diff file_name -- lists changes made to file_name file
+
+git checkout branch_name -- used to switch to branch_name branch
+
+
