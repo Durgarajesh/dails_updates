@@ -3,13 +3,12 @@
 1. rvm instllation
 
 2. ruby version on it
-
    rvm -v -- give version of rvm insalled
    rvm list  -- list all the ruby versions installed on ubunu machine
    rvm install 1.9.3  -- installs ruby version 1.9.3
    rvm install 1.8.7  --
    rvm install 2.0.0  --
-   
+
    rvm list
    rvm use 1.9.3  -- used select ruby version 1.9.3
    ruby -v   -- it will gives 1.9.3
@@ -50,3 +49,23 @@
 
 
 
+git commands
+
+git init -- to initialize empty git repository
+
+git status -- to the status of orking directory
+
+git add .  -- used to add untracked files
+
+git commit -am "messagehere" -- this command is used to commit the changes
+
+git push origin branch_name -- used to push locally commited changes to specific branch
+
+
+git branch --all   -- lists all the branches in the repository
+
+git branch  -- will gives list of active branches
+
+git checkout branch_name  -- it switch branch_name branch
+
+git checkout -b branch_name1  -- create creates a new branch called branch_name1 and selects that branch 
