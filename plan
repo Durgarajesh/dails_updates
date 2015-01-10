@@ -1,4 +1,31 @@
-steps to install git on ubuntu
+To install Sublime-Text-2:
+ 1.sudo add-apt-repository ppa:webupd8team/sublime-text-2
+ 2.sudo apt-get update
+ 3.sudo apt-get install sublime-text
+To install  Sublime-Text-3:
+ 1.sudo add-apt-repository ppa:webupd8team/sublime-text-3
+ 2.sudo apt-get update
+ 3.sudo apt-get install sublime-text-installer
+
+To install mysql in ubuntu
+ sudo apt-get install mysql-server
+To restart mysql server
+ sudo service mysql restart
+To stop mysql server
+ sudo service mysql stop
+To install mysql query tunner
+ sudo apt-get install mysqltuner
+To run mysql query tunner:
+ mysqltune
+To login in mysql database
+ mysql -u root -p
+Some use mysql commands
+  show databases;
+  use database_name;
+  show databases;
+  show tables;
+
+Steps to install git on ubuntu
 
 1. install development tolls
    sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev build-essential
@@ -11,10 +38,10 @@ steps to install git on ubuntu
    git config --global user.email yadagiri1125@example.com
 4.git config --list
 
-
-
-
 1. rvm instllation
+    1.sudo apt-get install curl #it will install curl
+    2.\curl -sSL https://get.rvm.io | bash -s stable
+    3.gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 #if you get error in step2
 
 2. ruby version on it
    rvm -v -- give version of rvm insalled
@@ -31,8 +58,7 @@ steps to install git on ubuntu
    rvm use 1.8.7
    ruby -v  -- will give 1.8.7
    
-  1.   install 1.9.3  --> 2.3.5,3.2.3,4.0.0
-  2. we can install multiple versions of rails in single ruby
+  1.   install 2.3.5,3.2.3,4.0.0 rails versions in ruby 1.9.3 by creating proper gemsets
    
    rvm use 1.9.3   -- used select ruby 1.9.3
    rvm gemset create rails2  -- create a gemset for rails2
@@ -47,23 +73,14 @@ steps to install git on ubuntu
    rvm gemset use rails4 -- select the gemset for rails2
    gem  install rails -v '4.0.0'
 
-  1. use 2.0.0 and install 3.2.3 , 4.0.0,4.1.0
-  2. use 1.8.7 and install 2.3.5, 2.8.7 and 3.0.0
-
-   
-
-   
+  2. inatsall 3.2.3 , 4.0.0,4.1.0 rails versions in ruby 2.0.0 using proper gemsets
+  3. install 2.3.5, 2.8.7 and 3.0.0 rails versions in ruby 1.8.7 using proper gemsets
 
 3.installation of rails versions
-
 4.installation of mysql and postgres
-
 5. installations of ides like rubymine,netbeans,sublime
 
-
-
-
-git commands
+#git commands
 
 git init -- to initialize empty git repository
 
