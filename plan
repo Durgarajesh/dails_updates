@@ -145,3 +145,9 @@ git commit -am "add proper message"
 git push origin your_branch
 
 
+### how to resolve error  Rvm is not a function selecting rubies with'rvm use' will not work
+ 1.Go to edit option in terminal
+ 2.Click profile preference
+ 3.Select title and command
+ 4.Click command
+ 5.Close terminal open the new terminal
