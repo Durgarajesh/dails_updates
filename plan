@@ -23,6 +23,7 @@ To run mysql query tunner:
  mysqltune
 To login in mysql database
  mysql -u root -p
+
 Some use mysql commands
   show databases;
   use database_name;
