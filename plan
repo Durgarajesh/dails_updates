@@ -115,7 +115,7 @@ git diff file_name -- lists changes made to file_name file
 git checkout branch_name -- used to switch to branch_name branch
 
 
-git stash -- it stashes  local changes
+git stash -- it stashes  local changes/it removes locally made changes
 
 git stash list -- it lists all the stashes
 
@@ -152,3 +152,23 @@ git push origin your_branch
  3.Select title and command
  4.Click command
  5.Close terminal open the new terminal
+
+
+ Task 1 #: made changes to sample project
+
+ 1.cd sample
+ 2.rvm use 1.9.3
+ 3.rvm use rails3
+ 4.subl .
+ 5.rails g controller dashboard index show  #this command used to create one controller and 2 views
+
+
+
+
+
+ Ruby On Rails::
+ Ruby : is s programming language for rails framework
+ Rails :: is a framework which developed in ruby
+
+    1.MVC design pattern --> M-> Model(table in the database,is a .rb file),V-> views(html,haml,js,json,pdf,txt...),C-> Controller(is also a .rb file)
+       url in the browser --> config/routes.rb --> corresopding controller -->controller interacts with model to read or write data from/to model
