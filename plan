@@ -153,6 +153,14 @@ git push origin your_branch
  4.Click command
  5.Close terminal open the new terminal
 
+ ##### how to resolve `autodetect': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)
+    1.nano Gemfile
+    2. write Gemfile gem 'execjs' and  gem 'therubyracer'
+    3. CTRL+O and enter
+    4. CTRL+ X and enter
+    5. bundle install
+
+
 
  Task 1 #: made changes to sample project
 
@@ -161,6 +169,8 @@ git push origin your_branch
  3.rvm use rails3
  4.subl .
  5.rails g controller dashboard index show  #this command used to create one controller and 2 views
+ 6.rails g model User name:string age:integer department:string is_active:boolean # create users table 
+              in the database and user.rb filein app/models
 
 
 
