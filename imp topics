@@ -1,0 +1,196 @@
+
+*** git log and git reflog
+   1.
+
+git log shows the current HEAD and its ancestry. That is, it prints the commit HEAD points to, then its parent, its parent, and so on. It traverses back through the repo's ancestry, by recursively looking up each commit's parent.
+
+(In practise, some commits have more than one parent. To see a more representative log, use a command like git log --oneline --graph --decorate.)
+
+git reflog doesn't traverse HEAD's ancestry at all. The reflog is an ordered list of the commits that HEAD has pointed to: it's undo history for your repo. The reflog isn't part of the repo itself (it's stored separately to the commits themselves) and isn't included in pushes, fetches or clones; it's purely local.
+
+Aside: understanding the reflog means you can't really lose data from your repo once it's been committed. If you accidentally reset to an older commit, or rebase wrongly, or any other operation that visually "removes" commits, you can use the reflog to see where you were before and git reset --hard back to that ref to restore your previous state. Remember, refs imply not just the commit but the entire history behind it.
+
+
+2.
+
+    git log shows the commit log accessible from the refs (heads, tags, remotes)
+    git reflog is a record of all commits that are or were referenced in your repo at any time.
+
+That is why git reflog (a local recording which is pruned after 90 days by default) is used when you do a "destructive" operation (like deleting a branch), in order to get back the SHA1 that was referenced by that branch.
+See git config:
+
+gc.reflogexpire
+gc.<pattern>.reflogexpire
+
+    git reflog expire removes reflog entries older than this time; defaults to 90 days.
+    With "<pattern>" (e.g. "refs/stash") in the middle the setting applies only to the refs that match the <pattern>.
+
+        git log shows the commit log accessible from the refs (heads, tags, remotes)
+        git reflog is a record of all commits that are or were referenced in your repo at any time.
+
+    That is why git reflog (a local recording which is pruned after 90 days by default) is used when you do a "destructive" operation (like deleting a branch), in order to get back the SHA1 that was referenced by that branch.
+    See git config:
+
+    gc.reflogexpire
+    gc.<pattern>.reflogexpire
+
+        git reflog expire removes reflog entries older than this time; defaults to 90 days.
+        With "<pattern>" (e.g. "refs/stash") in the middle the setting applies only to the refs that match the <pattern>.
+
+    safety net
+
+    git reflog is often reference as "your safety net"
+
+    In case of trouble, the general advise, when git log doesn't show you what you are looking for, is:
+
+        "Keep calm and use git reflog"
+
+    keep calm
+
+    Again, reflog is a local recording of your SHA1.
+    As opposed to git log: if you push your repo to an upstream repo, you will see the same git log, but not necessary the same git reflog.
+
+    3.
+
+    Here's the explanation of reflog from the Pro Git book:
+
+        One of the things Git does in the background while you’re working away is keep a reflog — a log of where your HEAD and branch references have been for the last few months.
+
+        You can see your reflog by using git reflog:
+
+        $ git reflog
+        734713b... HEAD@{0}: commit: fixed refs handling, added gc auto, updated
+        d921970... HEAD@{1}: merge phedders/rdocs: Merge made by recursive.
+        1c002dd... HEAD@{2}: commit: added some blame and merge stuff
+        1c36188... HEAD@{3}: rebase -i (squash): updating HEAD
+        95df984... HEAD@{4}: commit: # This is a combination of two commits.
+        1c36188... HEAD@{5}: rebase -i (squash): updating HEAD
+        7e05da5... HEAD@{6}: rebase -i (pick): updating HEAD
+
+        Every time your branch tip is updated for any reason, Git stores that information for you in this temporary history. And you can specify older commits with this data, as well.
+
+    The reflog command can also be used to delete entries or expire entries from the reflog that are too old. From the official Linux Kernel Git documentation for reflog:
+
+        The subcommand expire is used to prune older reflog entries.
+
+        To delete single entries from the reflog, use the subcommand delete and specify the exact entry (e.g. git reflog delete master@{2}).
+
+  
+Click here to Reply or Forward
+4.96 GB (33%) of 15 GB used
+Manage
+Terms - Privacy
+Last account activity: 40 minutes ago
+Details
+  
+  
+
+
+
+*** classs  and modules 
+
+            46 down vote accepted
+
+            TL;DR: Module is the superclass of Class. Module is an instance of Class.
+            Let me try to explain it more clearly. Please forgive my handwritten drawings - I don't have any fancy drawing software.
+
+            Every class in Ruby has 1 superclass*.
+
+            enter image description here
+
+            *Except for BasicObject, which doesn't have a superclass.
+
+            Read the above graphic like this: The superclass of Float is Numeric. The superclass of Numeric is Object, etc...
+
+            When you instantiate an object, the object will be an instance of some class. For example, "Nathan" is an instance of the String class. So is "Joe" or "John". 1 is an instance of the Fixnum class, as are 2, 3, 4, etc...
+
+            enter image description here
+
+            Read the above graphic like this: "Joe" is an instance of String. 1 is an instance of Fixnum, etc...
+
+            Well, in Ruby, unlike in most other languages, Class is a just another class, and it can be instantiated, too, just like Fixnum or String.
+
+            enter image description here
+
+            Read the above graphic like this: 0.01 is an instance of Float. String is an instance of Class, etc...
+
+            Realize that Fixnum is an instance of Class, just like "Nathan" is an instance of String. Just like "John" is an instance of String, Float is just an instance of Class. Every class is just an an instance of Class, even Class itself!
+
+            Whenever you write a new class in your app, you are just instantiating a new object whose class is Class, just like Hash.new instantiates a new Hash, or "Nathan" instantiates a new String.
+
+            # By running this, you will be instantiating a new Class, and 
+            # it will be named Post 
+            class Post < ActiveRecord::Base
+            end
+
+            # Here is another perfectly valid way to write the above code:
+            Post = Class.new(ActiveRecord::Base)
+
+            # you can even instantiate a Class without giving it an explicit name:
+            x = Class.new(ActiveRecord::Base)
+
+            # and since your new things are classes, they can be instantiated
+            obj1 = Post.new
+            obj2 = x.new
+
+            Furthermore, Module is just another instance of Class. Whenever you write a new module in your app, you are just instantiating a new Module.
+
+            # this will instantiate a new Module, and assign it to Foo
+            module Foo
+            end
+
+            # Here is another perfectly valid way to write the above code:
+            Foo = Module.new
+
+            # you can even instantiate a Module without giving it an explicit name.
+            m = Module.new
+
+            An aside: A Module is just a collection of methods and constants. Classes are also a collection of methods and constants, but with the added functionality of being able to be instantiated. A module cannot be instantiated. That is, m.new will not work.
+
+            So, referring back to the top graphic, your question can be answered directly:
+
+                So a class's parent is module, but module is a class?
+
+            You can see from the top graphic: Module is the superclass of Class.
+
+            From the bottom graphic: Module is an instance of Class.
+              
+            Click here to Reply or Forward
+
+***send and eval difference in ruby 
+
+    Whatever you can do with send is a proper subset of that of instance_eval. Namely, the argument to send has to be a single method (and its arguments), whereas the argument to instance_method is an arbitrary code. So whenever you have send, you can rewrite it with instance_eval, but not vice versa.
+
+    However, performancewise, send is much faster than instance_eval since there is no additional parsing required to execute send, whereas instance_eval needs to parse the whole argument.
+
+    In your example, the result will be the same, but the first one will run faster.
+
+
+***method overloading in ruby
+
+      You want to create two different versions of a method with the same name: two methods that differ in the arguments they take. However, a Ruby class can have only one method with a given name (if you define a method with the same name twice, the latter method definition prevails as seen in example p038or.rb in topic Ruby Overriding Methods). Within that single method, though, you can put logic that branches depending on how many and what kinds of objects were passed in as arguments.
+
+      Here's a Rectangle class that represents a rectangular shape on a grid. You can instantiate a Rectangle by one of two ways: by passing in the coordinates of its top-left and bottom-right corners, or by passing in its top-left corner along with its length and width. There's only one initialize method, but you can act as though there were two.
+
+          # The Rectangle constructor accepts arguments in either  
+          # of the following forms:  
+          #   Rectangle.new([x_top, y_left], length, width)  
+          #   Rectangle.new([x_top, y_left], [x_bottom, y_right])  
+          class Rectangle  
+            def initialize(*args)  
+              if args.size < 2  || args.size > 3  
+                # modify this to raise exception, later  
+                puts 'This method takes either 2 or 3 arguments'  
+              else  
+                if args.size == 2  
+                  puts 'Two arguments'  
+                else  
+                  puts 'Three arguments'  
+                end  
+              end  
+            end  
+          end  
+          Rectangle.new([10, 23], 4, 10)  
+          Rectangle.new([10, 23], [14, 13])  
+
+      The above program p037rectangle.rb is incomplete from the Rectangle class viewpoint, but is enough to demonstrate how method overloading can be achieved. Also remember that the initialize method takes in a variable number of arguments.
