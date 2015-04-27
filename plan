@@ -207,7 +207,24 @@ git push origin your_branch
       t.decimal :price
       t.timestamps null: false
     end
+8.add column migration 
 
+  a.bin/rails generate migration AddPartNumberToProducts part_number:string
+  b.
+      class AddPartNumberToProducts < ActiveRecord::Migration
+        def change
+          add_column :products, :part_number, :string
+        end
+      end
+9. rename column migration rails
+
+ a.
+ change_table :products do |t|
+  t.remove :description, :name
+  t.string :part_number
+  t.index :part_number
+  t.rename :upccode, :upc_code
+ end
 
 
  Ruby On Rails::
