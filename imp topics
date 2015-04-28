@@ -1,29 +1,54 @@
 
+
+*** Duck Typing
+
+      In computer programming with object-oriented programming languages, duck typing is a layer of programming language and design rules on top of typing. Typing is concerned with assigning a type to any object. Duck typing is concerned with establishing the suitability of an object for some purpose. With normal typing, suitability is assumed to be determined by an object's type only. In contrast in duck typing, an object's suitability is determined by the presence of certain methods and properties (with appropriate meaning), rather than the actual type of the object.
+
+      The name of the concept refers to the duck test, attributed to James Whitcomb Riley, which may be phrased as follows:
+
+          When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.[1]
+
+      In duck typing, a programmer is only concerned with ensuring that objects behave as demanded of them in a given context, rather than ensuring that they are of a specific type. For example, in a non-duck-typed language, one would create a function that requires that the object passed into it be of type Duck, in order to ensure that that function can then use the object's walk and quack methods. In a duck-typed language, the function would take an object of any type and simply call its walk and quack methods, producing a run-time error if they are not defined. Instead of specifying types formally, duck typing practices rely on documentation, clear code, and testing to ensure correct use.
+
+       Consider the following pseudo-code for a duck-typed language:
+
+      function calculate(a, b, c) => return (a + b)*c
+
+      example1 = calculate (1, 2, 3)
+      example2 = calculate ([1, 2, 3], [4, 5, 6], 2)
+      example3 = calculate ('apples ', 'and oranges, ', 3)
+
+      print to_string example1
+      print to_string example2
+      print to_string example3
+
+      In the example, each time the calculate function is called, objects without related inheritance may be used (numbers, lists and strings). As long as the objects support the "+" and "*" methods, the operation will succeed. If translated to Ruby or Python, for example, the result of the code would be:
+
+      9
+      [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
+      apples and oranges, apples and oranges, apples and oranges,
+
+
+
+
+*** open classes in ruby 
+
+      In Ruby, classes are never closed: methods can always be added to an existing class. This applies to all classes, including the standard, built-in classes. All that is needed to do is open up a class definition for an existing class, and the new contents specified will be added to the existing contents. A simple example of adding a new method to the standard library's Time class:
+
+
 *** git log and git reflog
-   1.
+       1.
 
-git log shows the current HEAD and its ancestry. That is, it prints the commit HEAD points to, then its parent, its parent, and so on. It traverses back through the repo's ancestry, by recursively looking up each commit's parent.
+    git log shows the current HEAD and its ancestry. That is, it prints the commit HEAD points to, then its parent, its parent, and so on. It traverses back through the repo's ancestry, by recursively looking up each commit's parent.
 
-(In practise, some commits have more than one parent. To see a more representative log, use a command like git log --oneline --graph --decorate.)
+    (In practise, some commits have more than one parent. To see a more representative log, use a command like git log --oneline --graph --decorate.)
 
-git reflog doesn't traverse HEAD's ancestry at all. The reflog is an ordered list of the commits that HEAD has pointed to: it's undo history for your repo. The reflog isn't part of the repo itself (it's stored separately to the commits themselves) and isn't included in pushes, fetches or clones; it's purely local.
+    git reflog doesn't traverse HEAD's ancestry at all. The reflog is an ordered list of the commits that HEAD has pointed to: it's undo history for your repo. The reflog isn't part of the repo itself (it's stored separately to the commits themselves) and isn't included in pushes, fetches or clones; it's purely local.
 
-Aside: understanding the reflog means you can't really lose data from your repo once it's been committed. If you accidentally reset to an older commit, or rebase wrongly, or any other operation that visually "removes" commits, you can use the reflog to see where you were before and git reset --hard back to that ref to restore your previous state. Remember, refs imply not just the commit but the entire history behind it.
+    Aside: understanding the reflog means you can't really lose data from your repo once it's been committed. If you accidentally reset to an older commit, or rebase wrongly, or any other operation that visually "removes" commits, you can use the reflog to see where you were before and git reset --hard back to that ref to restore your previous state. Remember, refs imply not just the commit but the entire history behind it.
 
 
-2.
-
-    git log shows the commit log accessible from the refs (heads, tags, remotes)
-    git reflog is a record of all commits that are or were referenced in your repo at any time.
-
-That is why git reflog (a local recording which is pruned after 90 days by default) is used when you do a "destructive" operation (like deleting a branch), in order to get back the SHA1 that was referenced by that branch.
-See git config:
-
-gc.reflogexpire
-gc.<pattern>.reflogexpire
-
-    git reflog expire removes reflog entries older than this time; defaults to 90 days.
-    With "<pattern>" (e.g. "refs/stash") in the middle the setting applies only to the refs that match the <pattern>.
+    2.
 
         git log shows the commit log accessible from the refs (heads, tags, remotes)
         git reflog is a record of all commits that are or were referenced in your repo at any time.
@@ -37,51 +62,63 @@ gc.<pattern>.reflogexpire
         git reflog expire removes reflog entries older than this time; defaults to 90 days.
         With "<pattern>" (e.g. "refs/stash") in the middle the setting applies only to the refs that match the <pattern>.
 
-    safety net
+            git log shows the commit log accessible from the refs (heads, tags, remotes)
+            git reflog is a record of all commits that are or were referenced in your repo at any time.
 
-    git reflog is often reference as "your safety net"
+        That is why git reflog (a local recording which is pruned after 90 days by default) is used when you do a "destructive" operation (like deleting a branch), in order to get back the SHA1 that was referenced by that branch.
+        See git config:
 
-    In case of trouble, the general advise, when git log doesn't show you what you are looking for, is:
+        gc.reflogexpire
+        gc.<pattern>.reflogexpire
 
-        "Keep calm and use git reflog"
+            git reflog expire removes reflog entries older than this time; defaults to 90 days.
+            With "<pattern>" (e.g. "refs/stash") in the middle the setting applies only to the refs that match the <pattern>.
 
-    keep calm
+        safety net
 
-    Again, reflog is a local recording of your SHA1.
-    As opposed to git log: if you push your repo to an upstream repo, you will see the same git log, but not necessary the same git reflog.
+        git reflog is often reference as "your safety net"
 
-    3.
+        In case of trouble, the general advise, when git log doesn't show you what you are looking for, is:
 
-    Here's the explanation of reflog from the Pro Git book:
+            "Keep calm and use git reflog"
 
-        One of the things Git does in the background while you’re working away is keep a reflog — a log of where your HEAD and branch references have been for the last few months.
+        keep calm
 
-        You can see your reflog by using git reflog:
+        Again, reflog is a local recording of your SHA1.
+        As opposed to git log: if you push your repo to an upstream repo, you will see the same git log, but not necessary the same git reflog.
 
-        $ git reflog
-        734713b... HEAD@{0}: commit: fixed refs handling, added gc auto, updated
-        d921970... HEAD@{1}: merge phedders/rdocs: Merge made by recursive.
-        1c002dd... HEAD@{2}: commit: added some blame and merge stuff
-        1c36188... HEAD@{3}: rebase -i (squash): updating HEAD
-        95df984... HEAD@{4}: commit: # This is a combination of two commits.
-        1c36188... HEAD@{5}: rebase -i (squash): updating HEAD
-        7e05da5... HEAD@{6}: rebase -i (pick): updating HEAD
+        3.
 
-        Every time your branch tip is updated for any reason, Git stores that information for you in this temporary history. And you can specify older commits with this data, as well.
+        Here's the explanation of reflog from the Pro Git book:
 
-    The reflog command can also be used to delete entries or expire entries from the reflog that are too old. From the official Linux Kernel Git documentation for reflog:
+            One of the things Git does in the background while you’re working away is keep a reflog — a log of where your HEAD and branch references have been for the last few months.
 
-        The subcommand expire is used to prune older reflog entries.
+            You can see your reflog by using git reflog:
 
-        To delete single entries from the reflog, use the subcommand delete and specify the exact entry (e.g. git reflog delete master@{2}).
+            $ git reflog
+            734713b... HEAD@{0}: commit: fixed refs handling, added gc auto, updated
+            d921970... HEAD@{1}: merge phedders/rdocs: Merge made by recursive.
+            1c002dd... HEAD@{2}: commit: added some blame and merge stuff
+            1c36188... HEAD@{3}: rebase -i (squash): updating HEAD
+            95df984... HEAD@{4}: commit: # This is a combination of two commits.
+            1c36188... HEAD@{5}: rebase -i (squash): updating HEAD
+            7e05da5... HEAD@{6}: rebase -i (pick): updating HEAD
 
-  
-Click here to Reply or Forward
-4.96 GB (33%) of 15 GB used
-Manage
-Terms - Privacy
-Last account activity: 40 minutes ago
-Details
+            Every time your branch tip is updated for any reason, Git stores that information for you in this temporary history. And you can specify older commits with this data, as well.
+
+        The reflog command can also be used to delete entries or expire entries from the reflog that are too old. From the official Linux Kernel Git documentation for reflog:
+
+            The subcommand expire is used to prune older reflog entries.
+
+            To delete single entries from the reflog, use the subcommand delete and specify the exact entry (e.g. git reflog delete master@{2}).
+
+      
+    Click here to Reply or Forward
+    4.96 GB (33%) of 15 GB used
+    Manage
+    Terms - Privacy
+    Last account activity: 40 minutes ago
+    Details
   
   
 
