@@ -19,14 +19,16 @@ To stop mysql server
 To login in mysql database
  mysql -u root -p
 
-To stop mysql server
- sudo service mysql start
 
 Some use mysql commands
   show databases;
   use database_name;
   show databases;
   show tables;
+
+To stop mysql server
+ sudo service mysql start
+
 
 Steps to install git on ubuntu
 
@@ -194,7 +196,7 @@ git push origin your_branch
 
  1.cd sample
  2.rvm use 1.9.3
- 3.rvm use rails3
+ 3.rvm gemset use rails3
  4.subl .
  5.rails g controller dashboard index show  #this command used to create one controller and 2 views
  6.rails g model User name:string age:integer department:string is_active:boolean # create users table 
@@ -227,12 +229,16 @@ git push origin your_branch
  end
 
 10. 
+Ruby On Rails::
 
-
- Ruby On Rails::
  Ruby :  Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro "Matz" Matsumoto in Japan.
 
- Rails :: 
+Rails :: 
 
     1.MVC design pattern --> M-> Model(table in the database,is a .rb file),V-> views(html,haml,js,json,pdf,txt...),C-> Controller(is also a .rb file)
        url in the browser --> config/routes.rb --> corresopding controller -->controller interacts with model to read or write data from/to model
+
+
+
+
+
